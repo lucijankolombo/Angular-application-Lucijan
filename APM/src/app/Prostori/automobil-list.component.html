@@ -1,0 +1,88 @@
+<br>
+<div class="container-fluid">
+    <h4>Unos automobila</h4>
+    <form #form="ngForm">
+        <div class="form-group">
+            <label for="sifra">Šifra automobila</label>
+            <input id="sifra" name="sifra" class="form-control" [(ngModel)]="automobil.sifraAutomobila" 
+            placeholder="Šifra automobila" required>
+            <br>
+            <label for="naziv">Naziv automobila</label>
+            <input id="naziv" name="naziv" class="form-control" [(ngModel)]="automobil.nazivAutomobila" placeholder="Naziv automobila" required>
+            <br>
+            <label for="snaga">Snaga automobila u KS</label>
+            <input id="snaga" name="snaga" class="form-control" [(ngModel)]="automobil.snagaAutomobila" placeholder="Snaga automobila" required>
+            <br>
+            <label for="cijena">Cijena automobila u KN</label>
+            <input id="cijena" name="cijena" class="form-control" [(ngModel)]="automobil.cijena" placeholder="Cijena" required>
+            <br>
+            <label for="godiste">Godište automobila</label>
+            <select id="godiste" name="godiste" class="form-control" [(ngModel)]="automobil.godiste" required>
+              <option>2020.</option>
+              <option>2019.</option>
+              <option>2018.</option>
+              <option>2017.</option>
+              <option>2016.</option>
+              <option>2015.</option>
+            </select>
+            <br>
+            <label for="boja">Boja automobila</label>
+            <select id="boja" name="boja" class="form-control" [(ngModel)]="automobil.boja" required>
+              <option>Crna</option>
+              <option>Bijela</option>
+              <option>Siva</option>
+              <option>Crvena</option>
+              <option>Plava</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" (click)="ubaciAutomobil()" [disabled]="!form.valid">Send</button>
+    </form>
+    <div class='card'>
+        <div class='card-header'>
+          Prikaz automobila
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Pretraživanje po marki automobila:</div>
+            <div class='col-md-2'>
+              <input type='text' id="myInput" class="form-control" (keyup)='pretraziTablicu()' style="width: 200px;" placeholder="search..."/>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary" (click)="sortirajPoCijeni()">Sortiraj po cijeni</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary" (click)="sortirajPoSnazi()">Sortiraj po snazi</button>
+            </div>
+          </div>
+          <div class='row'
+            >
+            <br>
+          </div>
+            <table class='table table-dark table-hover' id="myTable" *ngIf="submitted.length">
+              <thead>
+                <tr>
+                  <th>Šifra automobila</th>
+                  <th>Naziv automobila</th>
+                  <th>Snaga automobila (KS)</th>
+                  <th>Cijena automobila</th>
+                  <th>Godište automobila</th>
+                  <th>Boja automobila</th>
+                  <th>Obriši automobil</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of submitted; let i = index">
+                  <td>{{ item.sifraAutomobila }}</td>
+                  <td>{{ item.nazivAutomobila }}</td>
+                  <td>{{ item.snagaAutomobila }}</td>
+                  <td>{{ item.cijena }}</td>
+                  <td>{{ item.godiste }}</td>
+                  <td>{{ item.boja }}</td>
+                  <td><button class="btn btn-primary" (click)="delete(i)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+</div>
+

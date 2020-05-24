@@ -1,0 +1,62 @@
+<br>
+<div class="container-fluid">
+    <h4>Unos klijenata</h4>
+    <form #form="ngForm">
+        <div class="form-group">
+            <label for="sifra">Šifra klijenta</label>
+            <input id="sifra" name="sifra" class="form-control" [(ngModel)]="klijenti.sifraKlijenta" placeholder="Šifra klijenta" required>
+            <br>
+            <label for="ime">Ime klijenta</label>
+            <input id="ime" name="ime" class="form-control" [(ngModel)]="klijenti.imeKlijenta" placeholder="Ime klijenta" required>
+            <br>
+            <label for="prezime">Prezime klijenta</label>
+            <input id="prezime" name="prezime" class="form-control" [(ngModel)]="klijenti.prezimeKlijenta" placeholder="Prezime klijenta" required>
+            <br>
+            <label for="naziv">Naziv kupljenog automobila</label>
+            <input id="naziv" name="naziv" class="form-control" [(ngModel)]="klijenti.nazivKupljenogAutomobila" placeholder="Naziv" required>
+            <br>
+            <label for="kontakt">Kontakt broj</label>
+            <input id="kontakt" name="kontakt" class="form-control" [(ngModel)]="klijenti.kontaktBroj" placeholder="Kontakt broj" required>
+        </div>
+        <button class="btn btn-primary" (click)="ubaciKlijenta()" [disabled]="!form.valid">Send</button>
+    </form>
+    <div class='card'>
+        <div class='card-header'>
+          Prikaz klijenata
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Pretraživanje po imenu klijenta:</div>
+            <div class='col-md-2'>
+              <input type='text' id="myInput" class="form-control" (keyup)='pretraziTablicu()' style="width: 200px;" placeholder="search..."/>
+            </div>
+          </div>
+          <div class='row'
+            >
+            <br>
+          </div>
+            <table class='table table-dark table-hover' id="myTable" *ngIf="submitted.length">
+              <thead>
+                <tr>
+                  <th>Šifra klijenta</th>
+                  <th>Ime klijenta</th>
+                  <th>Prezime klijenta</th>
+                  <th>Naziv kupljenog automobila</th>
+                  <th>Kontakt broj</th>
+                  <th>Obriši klijenta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of submitted; let i = index">
+                  <td>{{ item.sifraKlijenta }}</td>
+                  <td>{{ item.imeKlijenta }}</td>
+                  <td>{{ item.prezimeKlijenta }}</td>
+                  <td>{{ item.nazivKupljenogAutomobila }}</td>
+                  <td>{{ item.kontaktBroj }}</td>
+                  <td><button class="btn btn-primary" (click)="delete(i)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+</div>

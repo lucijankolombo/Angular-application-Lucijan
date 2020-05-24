@@ -1,0 +1,92 @@
+<br>
+<div class="container-fluid">
+    <h4>Unos dobavljača</h4>
+    <form #form="ngForm">
+        <div class="form-group">
+            <label for="sifra">Šifra dobavljača</label>
+            <input id="sifra" name="sifra" class="form-control" [(ngModel)]="dobavljaci.sifraDobavljaca" placeholder="Šifra dobavljaca"
+            required>
+            <br>
+            <label for="ime">Ime dobavljača</label>
+            <input id="ime" name="ime" class="form-control" [(ngModel)]="dobavljaci.imeDobavljaca" placeholder="Ime dobavljača"
+            required>
+            <br>
+            <label for="lokacija">Lokacija dobavljača</label>
+            <input id="lokacija" name="lokacija" class="form-control" [(ngModel)]="dobavljaci.lokacija" placeholder="Lokacija dobavljača"
+            required>
+            <br>
+            <label for="kontakt">Kontakt broj</label>
+            <input id="kontakt" name="kontakt" class="form-control" [(ngModel)]="dobavljaci.kontaktBroj" placeholder="Kontakt broj"
+            required>
+            <br>
+            <label for="godina">Godina početka suradnje</label>
+            <select id="godina" name="godina" class="form-control" [(ngModel)]="dobavljaci.godinaPocetkaSuradnje"
+            required>
+              <option>2020.</option>
+              <option>2019.</option>
+              <option>2018.</option>
+              <option>2017.</option>
+              <option>2016.</option>
+              <option>2015.</option>
+              <option>2014.</option>
+              <option>2013.</option>
+              <option>2012.</option>
+              <option>2011.</option>
+              <option>2010.</option>
+              <option>2009.</option>
+            </select>
+            <br>
+            <label for="broj">Broj automobila za dostavu</label>
+            <input id="broj" name="broj" class="form-control" [(ngModel)]="dobavljaci.brojAutomobilaZaDostavu"
+            required>
+        </div>
+        <button class="btn btn-primary" (click)="ubaciDobavljaca()" [disabled]="!form.valid">Send</button>
+    </form>
+    <div class='card'>
+        <div class='card-header'>
+          Prikaz dobavljača
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Pretraživanje po lokaciji:</div>
+            <div class='col-md-2'>
+              <input type='text' id="myInput" class="form-control" (keyup)='pretraziTablicu()' style="width: 200px;" placeholder="search..."/>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary" (click)="sortirajPoBrojuAutomobila()">Sortiraj po br. automobila</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary" (click)="sortirajPoGodiniPocetkaSuradnje()">Sortiraj po god. početka</button>
+            </div>
+          </div>
+          <div class='row'
+            >
+            <br>
+          </div>
+            <table class='table table-dark table-hover' id="myTable" *ngIf="submitted.length">
+              <thead>
+                <tr>
+                  <th>Šifra dobavljača</th>
+                  <th>Ime dobavljača</th>
+                  <th>Lokacija</th>
+                  <th>Kontakt broj</th>
+                  <th>Godina početka suradnje</th>
+                  <th>Broj automobila za dostavu</th>
+                  <th>Obriši dobavljača</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of submitted; let i = index">
+                  <td>{{ item.sifraDobavljaca }}</td>
+                  <td>{{ item.imeDobavljaca }}</td>
+                  <td>{{ item.lokacija }}</td>
+                  <td>{{ item.kontaktBroj }}</td>
+                  <td>{{ item.godinaPocetkaSuradnje }}</td>
+                  <td>{{ item.brojAutomobilaZaDostavu }}</td>
+                  <td><button class="btn btn-primary" (click)="delete(i)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+</div>

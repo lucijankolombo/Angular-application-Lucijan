@@ -1,0 +1,71 @@
+<br>
+<div class="container-fluid">
+    <h4>Unos zaposlenika</h4>
+    <form #form="ngForm">
+        <div class="form-group">
+            <label for="sifra">Šifra zaposlenika</label>
+            <input id="sifra" name="sifra" class="form-control" [(ngModel)]="zaposlenici.sifraZaposlenika" placeholder="Šifra zaposlenika" required>
+            <br>
+            <label for="ime">Ime zaposlenika</label>
+            <input id="ime" name="ime" class="form-control" [(ngModel)]="zaposlenici.imeZaposlenika" placeholder="Ime zaposlenika" required>
+            <br>
+            <label for="prezime">Prezime zaposlenika</label>
+            <input id="prezime" name="prezime" class="form-control" [(ngModel)]="zaposlenici.prezimeZaposlenika" placeholder="Prezime zaposlenika" required>
+            <br>
+            <label for="iskustvo">Nivo radnog iskustva</label>
+            <select id="iskustvo" name="iskustvo" class="form-control" [(ngModel)]="zaposlenici.nivoIskustva" required>
+              <option>Intern</option>
+              <option>Junior</option>
+              <option>Intermediate</option>
+              <option>Senior</option>
+            </select>
+            <br>
+            <label for="godine">Godine rada</label>
+            <input id="godine" name="godine" class="form-control" [(ngModel)]="zaposlenici.godineRada" placeholder="Godine rada" required>
+        </div>
+        <button class="btn btn-primary" (click)="ubaciZaposlenika()" [disabled]="!form.valid">Send</button>
+    </form>
+    <div class='card'>
+        <div class='card-header'>
+          Prikaz zaposlenika
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Pretraživanje po imenu zaposlenika:</div>
+            <div class='col-md-2'>
+              <input type='text' id="myInput" class="form-control" (keyup)='pretraziTablicu()' style="width: 200px;" placeholder="search..."/>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary" (click)="sortirajPoGodinamaRada()">Sortiraj po god. rada</button>
+            </div>
+          </div>
+          <div class='row'
+            >
+            <br>
+          </div>
+            <table class='table table-dark table-hover' id="myTable" *ngIf="submitted.length">
+              <thead>
+                <tr>
+                  <th>Šifra zaposlenika</th>
+                  <th>Ime zaposlenika</th>
+                  <th>Prezime zaposlenika</th>
+                  <th>Nivo iskustva</th>
+                  <th>Godine rada</th>
+                  <th>Obriši zaposlenika</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of submitted; let i = index">
+                  <td>{{ item.sifraZaposlenika }}</td>
+                  <td>{{ item.imeZaposlenika }}</td>
+                  <td>{{ item.prezimeZaposlenika }}</td>
+                  <td>{{ item.nivoIskustva }}</td>
+                  <td>{{ item.godineRada }}</td>
+                  <td><button class="btn btn-primary" (click)="delete(i)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+</div>
+
